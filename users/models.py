@@ -2,7 +2,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 class CustomUser(AbstractUser):
-    # Add custom fields as needed
     subscription_valid = models.BooleanField(default=False)
     study_level = models.CharField(
         max_length=50,
@@ -23,3 +22,14 @@ class CustomUser(AbstractUser):
         null=True,
         blank=True,
     )
+    role = models.CharField(
+        max_length=50,
+        default='user',
+        choices=[
+            ('user', 'User'),
+            ('teacher', 'Teacher'),
+            ('student', 'Student'),
+            ('admin', 'Admin'),
+        ]
+    )
+    mobile_number = models.CharField(max_length=15, null=True, blank=True)
